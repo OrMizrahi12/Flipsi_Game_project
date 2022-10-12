@@ -40,10 +40,11 @@ namespace flipsiGame
         int speed = 5;
         int score = 0;
 
+        int jumpCounter = 0; 
+
         double spriteIndex =0;
         
         Random random = new Random();
-        Random randomGap = new Random();
 
         ImageBrush playerSprit = new ImageBrush();
         ImageBrush backgroundSprit = new ImageBrush();
@@ -94,19 +95,29 @@ namespace flipsiGame
                 playerSlide = true;
             }
 
-
-
-        }
-
-        private void KeyIsUp(object sender, KeyEventArgs e)
-        {
-            if(e.Key == Key.Space && jumping == false && Canvas.GetTop(player) > 250)
+            if (e.Key == Key.Space && jumping == false && Canvas.GetTop(player) > 250 )
             {
+                jumpCounter = 1;
                 jumping = true;
                 force = 15;
                 speed = -12;
                 playerSprit.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/newRunner_02.gif"));
             }
+            else if(jumpCounter == 1 && e.Key == Key.Space)
+            {
+                jumpCounter = 0;
+                jumping = true;
+                force = 10;
+                speed = -12;
+                playerSprit.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/newRunner_03.gif"));
+            }
+        
+
+        }
+
+        private void KeyIsUp(object sender, KeyEventArgs e)
+        {
+
             if (e.Key == Key.Down)
             {
 
@@ -117,10 +128,6 @@ namespace flipsiGame
 
         public void GameEngine(object sender, EventArgs e)
         {
-
-           
-
-
             Canvas.SetLeft(background1, Canvas.GetLeft(background1) - 7);
             Canvas.SetLeft(background2, Canvas.GetLeft(background2) - 7);
 
@@ -131,12 +138,11 @@ namespace flipsiGame
             Canvas.SetLeft(obstacle, Canvas.GetLeft(obstacle) - 7);
             Canvas.SetLeft(obstacleUp, Canvas.GetLeft(obstacleUp) - 7);
 
-            if (Canvas.GetLeft(background1) < -1262)
+            if (Canvas.GetLeft(background1) < -1261)
             {
-                //ground.width = randomgap.next(1000, 1200);
+               
                 if(Canvas.GetLeft(obstacleUp) > 0 && Canvas.GetLeft(obstacle) > 0)
-                ground.Width = random.Next(1000, 1150);
-
+                ground.Width = random.Next(1050, 1100);
                 Canvas.SetLeft(background1, Canvas.GetLeft(background2) + background2.Width);
             }
             if (Canvas.GetLeft(background2) < -1262)
@@ -152,9 +158,6 @@ namespace flipsiGame
             {
                 Canvas.SetLeft(ground2, Canvas.GetLeft(ground) + ground.Width);
             }
-
-
-
 
             playerHitBox = new Rect(Canvas.GetLeft(player), Canvas.GetTop(player), player.Width - 15, player.Height);
             opbstacleHitBox = new Rect(Canvas.GetLeft(obstacle), Canvas.GetTop(obstacle), obstacle.Width, obstacle.Height);
@@ -227,8 +230,10 @@ namespace flipsiGame
              
                 
             }
-
-            if (playerHitBox.IntersectsWith(opbstacleHitBox) && Canvas.GetLeft(player) < Canvas.GetLeft(obstacle))
+            //-obstacle.ActualWidth
+            if (playerHitBox.IntersectsWith(opbstacleHitBox) && Canvas.GetLeft(player)  < Canvas.GetLeft(obstacle) 
+              
+            )
             {
                 GameTimer.Stop();
                 gameOver = true;
@@ -237,7 +242,9 @@ namespace flipsiGame
                 score = 0;
                 scoreText.Content = $"Score: {score}";
             }
-            else if (playerHitBox.IntersectsWith(opbstacleUpHitBox) && !playerSlide && Canvas.GetLeft(player) < Canvas.GetLeft(obstacleUp))
+            else if (playerHitBox.IntersectsWith(opbstacleUpHitBox) && !playerSlide && Canvas.GetLeft(player) < Canvas.GetLeft(obstacleUp)
+                && Canvas.GetTop(player) > 150
+                )
             {
                 GameTimer.Stop();
                 gameOver = true;
@@ -265,7 +272,7 @@ namespace flipsiGame
 
             RunSprite(1);
 
-            opbstacleSprit.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/obstacleB.png"));
+            opbstacleSprit.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/obstacle.png"));
             obstacle.Fill = opbstacleSprit;
 
             jumping = false;
