@@ -24,8 +24,8 @@ namespace flipsiGame
         ImageBrush playerSprit = new ImageBrush(), backgroundSprit = new ImageBrush(),opbstacleSprit = new ImageBrush(), opbstacleUpSprit = new ImageBrush(), florSprit = new ImageBrush();
 
         public Rect playerHitBox, groundHitBox, groundHitBox2, opbstacleHitBox, opbstacleUpHitBox;
-        bool jumping, gameOver, canClickForStart = true, playerSlide = false;
-        int force = 20, speed = 5, score = 0,jumpCounter = 0;
+        bool playerJump, gameOver, canClickForStart = true, playerSlide = false;
+        int playerForce = 20, playerSpeed = 5, score = 0,jumpCounter = 0, distabce =0, speedGame = 8;
         int[] opbstaclePosition = { 320, 310, 300, 305, 315 };
         double spriteIndex =0;
         
@@ -63,20 +63,20 @@ namespace flipsiGame
                 canClickForStart = false;
                 StartGame();
             }
-            if (e.Key == Key.Space && jumping == false && Canvas.GetTop(player) > 250 )
+            if (e.Key == Key.Space && playerJump == false && Canvas.GetTop(player) > 250 )
             {
                 jumpCounter = 1;
-                jumping = true;
-                force = 15;
-                speed = -12;
+                playerJump = true;
+                playerForce = 15;
+                playerSpeed = -12;
                 playerSprit.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/newRunner_02.gif"));
             }
             else if(jumpCounter == 1 && e.Key == Key.Space)
             {
                 jumpCounter = 0;
-                jumping = true;
-                force = 10;
-                speed = -12;
+                playerJump = true;
+                playerForce = 10;
+                playerSpeed = -12;
                 playerSprit.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/newRunner_03.gif"));
             }
         }
@@ -89,13 +89,22 @@ namespace flipsiGame
 
         private void RunAnimation()
         {
-            Canvas.SetLeft(background1, Canvas.GetLeft(background1) - 7);
-            Canvas.SetLeft(background2, Canvas.GetLeft(background2) - 7);
-            Canvas.SetLeft(ground, Canvas.GetLeft(background1) - 7);
-            Canvas.SetLeft(ground2, Canvas.GetLeft(background2) - 7);
-            Canvas.SetTop(player, Canvas.GetTop(player) + speed);
-            Canvas.SetLeft(obstacle, Canvas.GetLeft(obstacle) - 7);
-            Canvas.SetLeft(obstacleUp, Canvas.GetLeft(obstacleUp) - 7);
+            Canvas.SetLeft(background1, Canvas.GetLeft(background1) - speedGame);
+            Canvas.SetLeft(background2, Canvas.GetLeft(background2) - speedGame);
+            Canvas.SetLeft(ground, Canvas.GetLeft(background1) - speedGame);
+            Canvas.SetLeft(ground2, Canvas.GetLeft(background2) - speedGame);
+            Canvas.SetTop(player, Canvas.GetTop(player) + playerSpeed);
+            Canvas.SetLeft(obstacle, Canvas.GetLeft(obstacle) - speedGame);
+            Canvas.SetLeft(obstacleUp, Canvas.GetLeft(obstacleUp) - speedGame);
+
+            distabce++;
+            scoreText.Content = distabce;
+
+            if(distabce % 500 == 0)
+            {
+                ++speedGame;
+
+            }
 
             if (Canvas.GetLeft(background1) < -1261)
             {
@@ -124,20 +133,20 @@ namespace flipsiGame
             if (playerHitBox.IntersectsWith(groundHitBox) || playerHitBox.IntersectsWith(groundHitBox2))
             {
                 Canvas.SetTop(player, Canvas.GetTop(ground) - player.Height);
-                speed = 0; jumping = false;
+                playerSpeed = 0; playerJump = false;
                 spriteIndex += .5;
 
                 if (spriteIndex > 8) spriteIndex = 1;
                 if (playerSlide == false)  RunSprite(spriteIndex);
                 else RunSprite(9);
             }
-            if (jumping)
+            if (playerJump)
             {
-                speed = -9;
-                force -= 1;
+                playerSpeed = -9;
+                playerForce -= 1;
             }
-            else speed = 12;
-            if (force < 0) jumping = false;
+            else playerSpeed = 12;
+            if (playerForce < 0) playerJump = false;
         }
 
         private void SetRects()
@@ -160,7 +169,7 @@ namespace flipsiGame
             opbstacleSprit.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/obstacle.png"));
             obstacle.Fill = opbstacleSprit;
 
-            jumping = false;
+            playerJump = false;
             gameOver = false;
             score = 0;
 
@@ -244,6 +253,8 @@ namespace flipsiGame
             gameControllText.Visibility = Visibility.Visible;
             gameControllText.Content = "Enter For Play Again >>";
             score = 0;
+            speedGame = 8;
+            distabce = 0;
             scoreText.Content = $"Score: {score}";
         }
     }
