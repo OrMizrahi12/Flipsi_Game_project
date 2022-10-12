@@ -14,9 +14,19 @@
         <Rectangle Name="ground" Height="60" Width="1262" Fill="Black"  Canvas.Top="374" HorizontalAlignment="Center" VerticalAlignment="Top" />
         <Rectangle Name="ground2" Height="60" Width="1262" Fill="Black"  Canvas.Top="374" Canvas.Left="1262" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
-        <Rectangle Name="player" Height="99" Width="67"  Canvas.Top="151" Canvas.Left="110" />
+        <Rectangle Name="player" Height="99" Width="67"  Canvas.Top="151" Canvas.Left="110" >
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="0"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="0"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
 
-        <Rectangle Name="obstacle" Height="178" Width="50" Canvas.Top="320" Canvas.Left="721" />
+        <Rectangle Name="obstacle" Height="178" Width="50" Canvas.Top="196" Canvas.Left="715" />
+        <Rectangle Name="obstacleUp" Height="322" Width="57" Canvas.Left="474" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
         <Label Name="scoreText" FontSize="22" FontWeight="Bold" Content="Score: " />
         <Label Content="Enter For Start >>"  Name="gameControllText" FontSize="50" FontWeight="Bold" HorizontalAlignment="Center" Canvas.Top="20" VerticalAlignment="Top"  />

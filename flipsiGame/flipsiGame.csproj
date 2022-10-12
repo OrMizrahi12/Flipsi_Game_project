@@ -146,9 +146,6 @@
     <Resource Include="images\J.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\obstacleA.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\obstacleB.png" />
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +168,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\florG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\newRunnerSlide.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\obstacleUpImg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\obstacleUpAImg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\image.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
