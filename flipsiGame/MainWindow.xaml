@@ -11,7 +11,8 @@
         <Rectangle Name="background1" Height="400" Width="1262" Fill="Orange" />
         <Rectangle Name="background2" Height="400" Width="1262" Fill="LightGreen" Canvas.Left="1262" />
 
-        <Rectangle Name="ground" Height="60" Width="800" Fill="Black"  Canvas.Top="350" Canvas.Left="0" />
+        <Rectangle Name="ground" Height="60" Width="1262" Fill="Black"  Canvas.Top="374" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <Rectangle Name="ground2" Height="60" Width="1262" Fill="Black"  Canvas.Top="374" Canvas.Left="1262" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
         <Rectangle Name="player" Height="99" Width="67"  Canvas.Top="151" Canvas.Left="110" />
 

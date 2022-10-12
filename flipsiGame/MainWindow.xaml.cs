@@ -26,6 +26,7 @@ namespace flipsiGame
 
         public Rect playerHitBox;
         public Rect groundHitBox;
+        public Rect groundHitBox2;
         public Rect opbstacleHitBox;
 
         bool jumping;
@@ -39,7 +40,7 @@ namespace flipsiGame
         double spriteIndex =0;
         
         Random random = new Random();
-        
+        Random randomGap = new Random();
         ImageBrush playerSprit = new ImageBrush();
         ImageBrush backgroundSprit = new ImageBrush();
         ImageBrush opbstacleSprit = new ImageBrush();
@@ -58,9 +59,11 @@ namespace flipsiGame
             backgroundSprit.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/J.jpg"));
             background1.Fill = backgroundSprit;
             background2.Fill = backgroundSprit;
-            florSprit.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/florD.png"));
+            florSprit.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/florF.png"));
             ground.Fill = florSprit;
-            
+            ground2.Fill = florSprit;
+
+    
 
 
         }
@@ -96,38 +99,64 @@ namespace flipsiGame
 
         public void GameEngine(object sender, EventArgs e)
         {
+           
             Canvas.SetLeft(background1, Canvas.GetLeft(background1) - 7);
             Canvas.SetLeft(background2, Canvas.GetLeft(background2) - 7);
-        
-            if(Canvas.GetLeft(background1) < -1260)
+
+            Canvas.SetLeft(ground, Canvas.GetLeft(background1) - 7);
+            Canvas.SetLeft(ground2, Canvas.GetLeft(background2) - 7);
+
+            Canvas.SetLeft(obstacle, Canvas.GetLeft(obstacle));
+          
+
+            if (Canvas.GetLeft(background1) < -1262)
             {
+                ground.Width = randomGap.Next(1000, 1200);
                 Canvas.SetLeft(background1, Canvas.GetLeft(background2) + background2.Width);
             }
-            if (Canvas.GetLeft(background2) < -1260)
+            if (Canvas.GetLeft(background2) < -1262)
             {
                 Canvas.SetLeft(background2, Canvas.GetLeft(background1) + background1.Width);
             }
+
+            if (Canvas.GetLeft(ground) < -1262)
+            {
+                Canvas.SetLeft(ground, Canvas.GetLeft(ground2) + ground2.Width );
+            }
+            if (Canvas.GetLeft(ground2) < -1262)
+            {
+                Canvas.SetLeft(ground2, Canvas.GetLeft(ground) + ground.Width);
+            }
+
 
             Canvas.SetTop(player, Canvas.GetTop(player) + speed);
             Canvas.SetLeft(obstacle, Canvas.GetLeft(obstacle) - 12);
 
             playerHitBox = new Rect(Canvas.GetLeft(player), Canvas.GetTop(player), player.Width - 15, player.Height);
             opbstacleHitBox = new Rect(Canvas.GetLeft(obstacle), Canvas.GetTop(obstacle), obstacle.Width, obstacle.Height);
-            groundHitBox = new Rect(Canvas.GetLeft(ground), Canvas.GetTop(ground), ground.Width, ground.Height + 30);
-          
-     
-            if (playerHitBox.IntersectsWith(groundHitBox))
+            groundHitBox = new Rect(Canvas.GetLeft(ground), Canvas.GetTop(ground), ground.Width , ground.Height);
+            groundHitBox2 = new Rect(Canvas.GetLeft(ground2), Canvas.GetTop(ground2), ground2.Width, ground2.Height);
+
+
+            if (playerHitBox.IntersectsWith(groundHitBox) || playerHitBox.IntersectsWith(groundHitBox2))
             {
                 speed = 0;
                 Canvas.SetTop(player, Canvas.GetTop(ground) - player.Height);
 
                 jumping = false;
-                spriteIndex += .5; 
+                spriteIndex += .5;
 
-                if(spriteIndex > 8) spriteIndex = 1;
+                if (spriteIndex > 8) spriteIndex = 1;
 
                 RunSprite(spriteIndex);
             }
+            if (Canvas.GetTop(player) > Canvas.GetTop(ground) || Canvas.GetTop(player) > Canvas.GetTop(ground2)) 
+            {
+                GameTimer.Stop();
+                gameOver = true;
+                gameControllText.Visibility = Visibility.Visible;
+                gameControllText.Content = "Enter For Play Again >>";
+            } 
 
             if (jumping)
             {
@@ -138,8 +167,8 @@ namespace flipsiGame
             
             if(force < 0) jumping = false;
 
-            
-            if(Canvas.GetLeft(obstacle) < -50)
+
+            if (Canvas.GetLeft(obstacle) < -100)
             {
                 score += 1;
                 scoreText.Content = $"Score: {score}";
@@ -178,8 +207,6 @@ namespace flipsiGame
             jumping = false;
             gameOver = false;
             score = 0;
-
-           
 
             GameTimer.Start();
         }
