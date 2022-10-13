@@ -7,14 +7,13 @@
         mc:Ignorable="d"
  Title="Endless Runner by Moo ICT" Height="450" Width="800">
     <Canvas Name="myCanvas" Focusable="True" KeyDown="KeyIsDown" KeyUp="KeyIsUp" Background="LightBlue">
+        <Rectangle RenderOptions.BitmapScalingMode="LowQuality" Name="background1" Height="400" Width="1262" Fill="Orange" />
+        <Rectangle RenderOptions.BitmapScalingMode="LowQuality" Name="background2" Height="400" Width="1262" Fill="LightGreen" Canvas.Left="1262" />
 
-        <Rectangle Name="background1" Height="400" Width="1262" Fill="Orange" />
-        <Rectangle Name="background2" Height="400" Width="1262" Fill="LightGreen" Canvas.Left="1262" />
-
-        <Rectangle Name="ground" Height="60" Width="1262" Fill="Black"  Canvas.Top="374" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <Rectangle RenderOptions.BitmapScalingMode="LowQuality" Name="ground" Height="60" Width="1262" Fill="Black"  Canvas.Top="374" HorizontalAlignment="Center" VerticalAlignment="Top" />
         <Rectangle Name="ground2" Height="60" Width="1262" Fill="Black"  Canvas.Top="374" Canvas.Left="1262" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
-        <Rectangle Name="player" Height="99" Width="67"  Canvas.Top="151" Canvas.Left="110" >
+        <Rectangle RenderOptions.BitmapScalingMode="LowQuality" Name="player" Height="99" Width="67"  Canvas.Top="275" Canvas.Left="114" >
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -25,11 +24,18 @@
             </Rectangle.RenderTransform>
         </Rectangle>
 
-        <Rectangle Name="obstacle" Height="178" Width="50" Canvas.Top="196" Canvas.Left="715" />
-        <Rectangle Name="obstacleUp" Height="322" Width="57" Canvas.Left="474" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <Rectangle RenderOptions.BitmapScalingMode="LowQuality" Name="obstacle" Height="178" Width="50" Canvas.Top="196" Canvas.Left="715" />
+        <Rectangle RenderOptions.BitmapScalingMode="LowQuality" Name="obstacleUp" Height="322" Width="57" Canvas.Left="474" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
-        <Label Name="scoreText" FontSize="22" FontWeight="Bold" Content="Score: " />
-        <Label Content="Enter For Start >>"  Name="gameControllText" FontSize="50" FontWeight="Bold" HorizontalAlignment="Center" Canvas.Top="20" VerticalAlignment="Top"  />
+        <Label Name="scoreText" FontSize="15" FontWeight="Bold" Content="Distance" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="42" />
+        <Label Content="Enter For Start >>"  Name="gameControllText" FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" Canvas.Top="162" VerticalAlignment="Top"  />
+
+        <Rectangle  x:Name="lifePlayerImg" Height="48" Width="49"/>
+
+        <Label Name="levelText" FontSize="15" FontWeight="Bold" Content="Level" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="63" />
+        <ProgressBar Value="100" x:Name="lifePrograsser" Height="10" Canvas.Left="54" Canvas.Top="14" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label  FontSize="15" FontWeight="Bold" Content="stop / continue press S" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="4" Canvas.Left="175" />
+        <Label Visibility="Collapsed" Name="gameOverTxt"  FontSize="30" FontWeight="Bold" Content="GAME OVER | Press enter" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="173" />
 
     </Canvas>
 </Window>

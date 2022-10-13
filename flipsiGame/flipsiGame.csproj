@@ -63,15 +63,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameManager.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Obstacle.cs" />
-    <Compile Include="PlayerController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -98,9 +95,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\backgroundGalaxy.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\background.gif" />
     <Resource Include="images\newRunner_01.gif" />
     <Resource Include="images\newRunner_02.gif" />
@@ -113,15 +107,6 @@
     <Resource Include="images\obstacle.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\backgroundStreem.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\backgroundCity.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\backgroundA.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\backgroundB.gif" />
   </ItemGroup>
   <ItemGroup>
@@ -131,46 +116,16 @@
     <Resource Include="images\C.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\D.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\E.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\F.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\H.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\I.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\J.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\obstacleB.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\florB.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\florA.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\florC.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\florD.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\florE.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\florF.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\florG.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\newRunnerSlide.png" />
@@ -182,7 +137,25 @@
     <Resource Include="images\obstacleUpAImg.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\image.png" />
+    <Resource Include="images\G.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Ljpg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\N.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\O1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\O.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\P.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\lifePlayer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
